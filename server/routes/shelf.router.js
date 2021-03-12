@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
       VALUES ($1, $2, $3);
   `;
     pool 
-      .query(sqlText, [req.body.newItem, req.body.newImgURL, req.user.id])
+      .query(sqlText, [req.body.newDescription, req.body.newImg, req.user.id])
       .then((result) => {
         res.sendStatus(201);
       })
