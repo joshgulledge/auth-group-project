@@ -32,7 +32,14 @@ import IconButton from '@material-ui/core/IconButton';
     height: '420px',
   },
   description: {
-    maxWidth: '150px'
+
+    maxWidth: '150px',
+    borderRadius: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    backgroundColor: '00acb0'
+
   }
 }));
 
@@ -43,29 +50,22 @@ function ShelfPage() {
 
   const dispatch = useDispatch();
 
-  const [spacing, setSpacing] = React.useState(2);
 
-  // useEffect(() => {
-  //   // make call to saga
-  //   dispatch({
-  //     type: 'CALL_SHELF'
-  //   })
-  // }, [])
+  useEffect(() => {
+    // make call to saga
+    dispatch({
+      type: 'CALL_SHELF'
+    })
+  }, [])
+
 
   const books = useSelector(store => store.shelfReducer);
 
-  const handleDelete = (e) => {
-    console.log('delete me');
-    axios.delete(`/api/shelf/${e.target.id}`)
-      .then((res) => {
-        console.log('book deleted');
-        dispatch({
-          type: 'CALL_SHELF'
-        })
-      })
-      .catch((err) => {
-        console.log('failed to delete book', err)
-      })
+  const handleDelete = (id) => {
+    dispatch({
+      type: 'DELETE_SHELF',
+      payload: id
+    })
   };
   
   return (
@@ -75,18 +75,21 @@ function ShelfPage() {
       <p>All of the available items can be seen here.</p>
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
-          <Grid container justify="left" spacing={spacing}>
+
+          <Grid container justify="left">
+
             {books.map(book => {
               return (
               <Grid key={book.id}>
                 <Typography variant="h6" className={classes.description}>{book.description}</Typography>
                 <img src={book.image_url} className={classes.img} />
                 <IconButton
-                  id={book.id} 
-                  onClick={handleDelete}
-                  fontSize="large"
-                  >
-                  <DeleteIcon />                   
+
+                  variant="contained"
+                  onClick={() => handleDelete(book.id)}
+                >
+                  <DeleteIcon />                  
+
                 </IconButton>
               </Grid>
               )

@@ -1,12 +1,15 @@
-import {put, takeLatest, takeEvery} from 'redux-saga/effects';
+
+import {put, takeEvery} from 'redux-saga/effects';
+
 import axios from 'axios';
 
 function* bookShelf (action) {
   yield takeEvery('CALL_SHELF', setTheShelf)
   yield takeEvery('POST_SHELF', postShelf)
+  yield takeEvery('DELETE_SHELF', deleteShelf)
 }; // end bookShelf
 
-function* setTheShelf (action) {
+function* setTheShelf () {
   try {
     const response = yield axios.get('/api/shelf');
 
@@ -32,6 +35,19 @@ function* postShelf(action){
   }
 }
 
+
+function* deleteShelf(action) {
+  try {
+    yield axios.delete(`/api/shelf/${action.payload}`);
+    yield put({
+      type: 'CALL_SHELF'
+    });
+  }
+  catch (err) {
+    console.log(err);
+    alert('error deleting item');
+  }
+}
+
 export default bookShelf;
 
-//Alvin is here
