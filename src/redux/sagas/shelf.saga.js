@@ -11,7 +11,7 @@ function* setTheShelf (action) {
 
     yield put({
       type: 'SET_SHELF',
-      payload: response
+      payload: response.data
     })
     
   }
