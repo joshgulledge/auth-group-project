@@ -1,7 +1,23 @@
-import {put, takeLatest} from 'readux-saga/effects';
+import {put, takeLatest, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
-import { takeEvery } from '@redux-saga/core/effects';
 
 function* bookShelf (action) {
-  yield takeEvery('CALL_SHELF')
+  yield takeEvery('CALL_SHELF', setTheShelf)
 }; // end bookShelf
+
+function* setTheShelf (action) {
+  try {
+    const response = yield axios.get('/api/shelf');
+
+    yield put({
+      type: 'SET_SHELF',
+      payload: response
+    })
+    
+  }
+  catch (err) {
+    console.log(err);
+  }
+}; // end setTheShelf
+
+export default bookShelf;

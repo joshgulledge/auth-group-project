@@ -5,7 +5,9 @@ const shelfReducer = (state = [], action) => {
       return action.payload;
     case 'UNSET_SHELF':
       return action.payload;
+    default:
+      return state
   }
-}; // end shelfRreducer
+}; // end shelfReducer
 
 export default shelfReducer;
