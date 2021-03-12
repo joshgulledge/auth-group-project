@@ -26,7 +26,7 @@ function* postShelf(action){
   try{
       console.log(action);
       yield axios.post('/api/shelf', action.payload);
-      yield put({type: 'SET_SHELF'});
+      yield put({type: 'CALL_SHELF'});
   } catch(err) {
       console.error(err);
       alert('error posting items');
