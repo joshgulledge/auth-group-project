@@ -3,6 +3,7 @@ import ShelfForm from '../ShelfForm/ShelfForm';
 import { useSelector } from 'react-redux';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import axios from 'axios';
 
 
 function ShelfPage() {
@@ -17,6 +18,20 @@ function ShelfPage() {
 
   // const books = useSelector(store => store.shelfReducer);
 
+  const handleDelete = (e) => {
+    console.log('delete me');
+    axios.delete(`/api/shelf/${e.target.id}`)
+      .then((res) => {
+        console.log('book deleted');
+        dispatch({
+          type: 'CALL_SHELF'
+        })
+      })
+      .catch((err) => {
+        console.log('failed to delete book', err)
+      })
+  };
+  
   return (
     <div className="container">
       <h2>Shelf</h2>
@@ -24,7 +39,10 @@ function ShelfPage() {
       {/* <ul>
         {books.map(book => {
           return (
-            <li key="book.id">{book.description}
+            <li key={book.id}>
+              <p>{book.description}</p>
+              <img src={book.image_url} width='100px' />
+              <button id={book.id} onClick={handleDelete}>Delete</button>
             </li>
           )
         })}
