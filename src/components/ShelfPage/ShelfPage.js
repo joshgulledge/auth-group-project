@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 function ShelfPage() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   // make call to saga
@@ -16,7 +16,7 @@ function ShelfPage() {
   //   })
   // }, [])
 
-  // const books = useSelector(store => store.shelfReducer);
+  const books = useSelector(store => store.shelfReducer);
 
   const handleDelete = (e) => {
     console.log('delete me');
@@ -36,7 +36,7 @@ function ShelfPage() {
     <div className="container">
       <h2>Shelf</h2>
       <p>All of the available items can be seen here.</p>
-      {/* <ul>
+      <ul>
         {books.map(book => {
           return (
             <li key={book.id}>
@@ -46,7 +46,7 @@ function ShelfPage() {
             </li>
           )
         })}
-      </ul> */}
+      </ul>
       <ShelfForm />
     </div>
   );
