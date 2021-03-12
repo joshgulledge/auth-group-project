@@ -31,6 +31,9 @@ import IconButton from '@material-ui/core/IconButton';
     width: '320px',
     height: '420px',
   },
+  description: {
+    maxWidth: '150px'
+  }
 }));
 
 
@@ -76,7 +79,7 @@ function ShelfPage() {
             {books.map(book => {
               return (
               <Grid key={book.id}>
-                <Typography variant="h6">{book.description}</Typography>
+                <Typography variant="h6" className={classes.description}>{book.description}</Typography>
                 <img src={book.image_url} className={classes.img} />
                 <IconButton
                   id={book.id} 
