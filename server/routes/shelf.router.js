@@ -29,26 +29,25 @@ router.post('/', (req, res) => {
   // endpoint functionality
 });
 
+
 /**
- * Delete an item if it's something the logged in user added
+ * Update an item if it's something the logged in user added
  */
 router.put('/:id', (req, res) => {
   // endpoint functionality
 });
 
 /**
- * Update an item if it's something the logged in user added
+ * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 
   let queryText = `
     DELETE FROM "item"
-    WHERE id = $1;
+    WHERE id = $1 AND user_id = $2;
   `;
-  let queryParams = [req.params.id];
-
-  console.log('queryParams', queryParams)
+  let queryParams = [req.params.id, req.user.id];
 
   pool.query(queryText, queryParams)
     .then(dbRes => {
