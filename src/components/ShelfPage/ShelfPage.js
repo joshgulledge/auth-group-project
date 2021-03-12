@@ -13,9 +13,7 @@ function ShelfPage() {
   // }, [])
 
   const books = useSelector(store => store.shelfReducer);
-
-  console.log(books);
-
+  
   return (
     <div className="container">
       <h2>Shelf</h2>
