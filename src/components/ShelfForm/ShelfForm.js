@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import {Button, TextField} from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 
 function ShelfForm() {
   const dispatch = useDispatch();
@@ -20,7 +22,8 @@ function ShelfForm() {
 
       <form onSubmit={addItem}>
         <label htmlFor="imageURL">
-          <input
+          <TextField
+            variant="outlined"
             name="imageURL"
             type="text"
             placeholder="URL goes here"
@@ -29,7 +32,8 @@ function ShelfForm() {
           />
         </label>
         <label htmlFor="description">
-          <input
+          <TextField
+          variant="outlined"
           name="description"
           type="textarea"
           placeholder="Description goes here"
@@ -37,10 +41,13 @@ function ShelfForm() {
           onChange={(event) => setNewDescription(event.target.value)}
           />
         </label>
-        <button 
+        <Button 
+          variant="contained"
+          color = 'primary'
           type="submit"
+          startIcon={<SaveIcon />}
           onClick={() => addItem}>
-        Add Item!</button>        
+        Add Item!</Button>        
       </form>
   )
 }
